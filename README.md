@@ -16,6 +16,17 @@ Configure environment variables as required.
 Build and deploy the Next.js application.
 Ensure the application is accessible via a web browser.
 
+Django Deployment
+
+Clone the Django codebase from the provided repository.
+Set up a virtual environment and install the necessary dependencies using pip.
+Configure environment variables and database settings.
+Apply migrations and create a superuser if necessary.
+Deploy the Django application using a WSGI server like Gunicorn and configure it
+with Nginx. (optional - you can deploy as you like)
+Ensure the application is accessible via a web browser.
+
+
 Part 2 :Tasks
 CI/CD Pipeline: (share the pipeline file you have written, in case you could not make it work due to environmental constraints)
 Set up a CI/CD pipeline using tools like Jenkins, GitHub Actions, or GitLab CI.

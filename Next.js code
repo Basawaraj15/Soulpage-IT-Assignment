@@ -58,6 +58,33 @@ sudo nano /etc/nginx/conf.d/fullstack-app.conf
 sudo nginx -t
 Then check the url as your public ip ex -http://54.219.186.26/login
 
+Steps to automate this process, we should go for GitHub Actions.
+
+Go to your GitHub repository.
+Click on Settings .
+name: Deploy to EC2
+on:
+push:
+branches: [ main ]
+jobs:
+deploy:
+runs-on: ubuntu-latest
+steps:
+ - uses: actions/checkout@v2
+name: Deploy to EC2
+env:
+PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
+HOST: ${{ secrets.EC2_HOST }}
+run: |
+echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+ssh -o StrictHostKeyChecking=no -i private_key ec2-user@${HOST} '
+cd fullstack-assignment &&
+git pull origin main &&
+docker-compose up --build -d
+Go to Secrets and click New repository secret .
+Add AWS EC2_PRIVATE_KEY (Public Ip) and EC2_HOST (Region) with their respective values
+
+
 
 
 

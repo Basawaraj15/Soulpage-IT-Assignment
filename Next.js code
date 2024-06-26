@@ -1,0 +1,68 @@
+ssh -i ~/Downloads/next.js.pem ec2-user@54.219.186.26
+sudo yum update -y
+sudo yum install -y docker git
+sudo service docker start
+start docker.service
+sudo service docker start
+start docker.service
+sudo usermod -a -G docker ec2-user
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" 
+sudo chmod +x /usr/local/bin/docker-compose
+git clone https://github.com/soulpage/fullstack-assignment.git
+cd fullstack-assignment
+cd frontend
+FROM node:18
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+EXPOSE 3000
+CMD ["npm", "start"]
+cd ..
+cd ~/fullstack-assignment/backend
+nano dockerfile
+type ctrl+x then yes and enter
+FROM python:3.10
+WORKDIR /app
+COPY dependencies.txt .
+RUN pip install -r dependencies.txt
+COPY . .
+EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+cd ~/fullstack-assignment
+nano docker-compose.yml
+version: '3'
+services:
+frontend:
+build: ./frontend
+ports:
+"3000:3000"
+backend:
+build: ./backend
+ports:
+"8000:8000"
+sudo yum update -y
+sudo yum install -y libxcrypt-compat
+ls -l /var/run/docker.sock
+sudo chmod 666 /var/run/docker.sock
+docker-compose up --build -d 
+sudo yum update -y
+cat /etc/os-release
+sudo dnf update -y
+sudo dnf install nginx -y
+sudo systemctl start nginx
+sudo systemctl enable nginx
+sudo systemctl status nginx
+sudo nano /etc/nginx/conf.d/fullstack-app.conf
+sudo nginx -t
+Then check the url as your public ip ex -http://54.219.186.26/login
+
+
+
+
+
+
+
+
+
